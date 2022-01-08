@@ -31,6 +31,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.imgSubs.unsubscribe();
   }
+  
   ngOnInit(): void {
     this.cargarUsuarios();
     this.imgSubs =  this.modalImagenService.nuevaImagen
