@@ -71,15 +71,15 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
  buscar(termino: String){
 
-if(termino.length===0){
-  return this.usuarios= this.usuariosTemp;
-}
-
-   this.busquedasService.buscar('usuarios',termino)
-   .subscribe( resultados => {
-      this.usuarios=resultados;
-   }
-    );
+    if(termino.length===0){
+      return this.usuarios= this.usuariosTemp;
+    }
+    
+       this.busquedasService.buscar('usuarios',termino)
+       .subscribe( (resultados : Usuario[]) => {
+          this.usuarios=resultados;
+       }
+        );
  }
 
  eliminarUsuario (usuario : Usuario){  
