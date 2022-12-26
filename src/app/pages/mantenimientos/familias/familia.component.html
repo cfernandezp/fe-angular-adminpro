@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Familia</h4>
+                <h6 class="card-subtitle">Actualizar Información</h6>
+
+
+                <form class="form-horizontal p-t-20" [formGroup]="familiaForm" (submit)="guardarFamilia()">
+
+                    <div class="form-group row" *ngIf="familiaSeleccionado">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Foto</label>
+                        <!-- <div class="col-sm-9">
+                            <div class="input-group">
+                                <img [src]="familiaSeleccionado.img | imagen:'medicos' " class="w200" />
+                            </div>
+                        </div> -->
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Nombre</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-user"></i></div>
+                                <input type="text" formControlName="nombre" class="form-control" id="exampleInputuname3" placeholder="Nombre de la familia">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputEmail3" class="col-sm-3 control-label">Grupo</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <select class="form-control" formControlName="grupo">
+                                    <option value="">Seleccione Grupo</option>
+                                    <option *ngFor="let grupo of grupos"  [value]="grupo._id"> {{grupo.nombre}} </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputEmail3" class="col-sm-3 control-label">Marca</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <select class="form-control" formControlName="marca">
+                                    <option value="">Seleccione Marca</option>
+                                    <option *ngFor="let marca of marcas"  [value]="marca._id"> {{marca.nombre}} </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputEmail3" class="col-sm-3 control-label">Titulo</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <select class="form-control" formControlName="titulo">
+                                    <option value="">Seleccione Grupo</option>
+                                    <option *ngFor="let titulo of titulos"  [value]="titulo._id"> {{titulo.nombre}} </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row m-b-0">
+                        <div class="offset-sm-3 col-sm-9">
+                            <button type="submit" [disabled]="familiaForm.invalid" class="btn btn-success waves-effect waves-light">
+                                <i class="fa fa-save"></i>
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col animated fadeIn fast" *ngIf="grupoSeleccionado">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Grupo</h4>
+                <h6 class="card-subtitle">{{grupoSeleccionado.nombre}}</h6>
+
+                <!-- <img [src]="grupoSeleccionado.img | imagen:'hospitales'" class="img-thumbnail" /> -->
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

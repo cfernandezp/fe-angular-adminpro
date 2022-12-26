@@ -1,0 +1,81 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input type="text" class="form-control" placeholder="Buscar titulo ..." #txtTermino (keyup)="buscar(txtTermino.value)" />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Total de titulos ({{ totalTitulos }})</h4>
+                        <h6 class="card-subtitle">Titulos registrados en mi aplicación</h6>
+                    </div>
+
+
+                    <div class="col">
+                        <div class="text-right">
+                            <button class="btn btn-primary" (click)="abrirSweeAlert()">                    
+                                <i class="fa fa-hospital-o"></i>
+                                Crear Titulo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <!-- <th class="w100">Foto</th> -->
+                                <th>Nombre</th>
+                                <th class="w100 text-nowrap">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let titulo of titulos">
+                                <!-- <td class="text-center">
+                                    <img [src]="marca.img | imagen : 'hospitales'" [alt]="marca.nombre" class="w100 cursor" (click)="abrirModal(marca)">
+                                </td> -->
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Nombre del titulo" [(ngModel)]="titulo.nombre" />
+                                </td>
+                                <td class="text-nowrap text-center">
+                                    <a (click)="guardarCambios(titulo)" data-toggle="tooltip" class="cursor" data-original-title="Guardar cambios">
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a (click)="eliminarTitulo(titulo)" data-toggle="tooltip" class="cursor" data-original-title="Borrar"> <i class="fa fa-close text-danger"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div *ngIf="txtTermino.value.length ===0 ">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary ">Anterioes</button> &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary ">Siguientes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

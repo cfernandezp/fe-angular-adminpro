@@ -42,6 +42,9 @@ export class UsuarioService {
       return this.usuario.uid || '';
 
     }
+    get role(): 'ADMIN_ROLE' |'USER_ROLE'{
+      return this.usuario.role;
+    }
 
     get headers (){
       return {
@@ -68,10 +71,18 @@ export class UsuarioService {
       
     }
 
+    guardarLocalStorage (token : string, menu:any){
+      localStorage.setItem('token',token);
+      localStorage.setItem('menu', JSON.stringify(menu));
+
+    }
+
   logout(){
     localStorage.removeItem('token');  
 
-    
+    // Todo: Borrar Menu
+    localStorage.removeItem('menu');
+
     this.auth2.signOut().then( () => {
 
       this.ngZone.run(() =>{
@@ -91,9 +102,11 @@ export class UsuarioService {
         }
     }).pipe(
       map((resp : any) =>{
-        const {email,google,img ='',nombre,role,uid} = resp.usuario;
-        this.usuario = new Usuario (nombre,email,'',img,google,role,uid);
-        localStorage.setItem('token',resp.token);
+        const {user,email,google,img ='',nombre,role,uid} = resp.usuario;
+        this.usuario = new Usuario (nombre,user,email,'',img,google,role,uid);
+
+        this.guardarLocalStorage(resp.token,resp.menu);
+
         return true;
       }),      
       catchError(error => of(false) )
@@ -106,7 +119,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/usuarios`, formData )
         .pipe(
           tap ( (resp : any) =>{
-            localStorage.setItem('token',resp.token)
+            this.guardarLocalStorage(resp.token,resp.menu);
           })
         );
 
@@ -127,7 +140,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login`, formData)
               .pipe(
                 tap ( (resp : any) =>{
-                  localStorage.setItem('token',resp.token)
+                  this.guardarLocalStorage(resp.token,resp.menu);
                 })
               );
     
@@ -138,7 +151,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login/google`, {token})
               .pipe(
                 tap ( (resp : any) =>{
-                  localStorage.setItem('token',resp.token)
+                  this.guardarLocalStorage(resp.token,resp.menu);
                 })
               );
     
@@ -153,7 +166,7 @@ export class UsuarioService {
       //delay(5000), 5 segundos demora
       map(resp=>{
         const usuarios = resp.usuarios.map( 
-          user => new Usuario(user.nombre,user.email,'',user.img,user.google, user.role, user.uid ) 
+          user => new Usuario(user.nombre,user.user,user.email,'',user.img,user.google, user.role, user.uid ) 
           );
         return {
           total : resp.total,

@@ -31,32 +31,35 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="w100">Avatar</th>
+                                <!-- <th class="w100">Avatar</th> -->
                                 <th>Correo</th>
                                 <th>Nombre</th>
+                                <th>UserName</th>
                                 <th class="w140">Role</th>
-                                <th class="w100">Auth</th>
+                                <!-- <th class="w100">Auth</th> -->
                                 <th class="text-nowrap w100">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let usuario of usuarios">
-                                <td class="text-center">
-                                    <img [src]="usuario.imagenUrl" alt="Avatar de Usuario" class="avatar cursor" (click)="abrirModal(usuario)">
 
-                                </td>
+                                <!-- <td class="text-center">
+                                    <img [src]="usuario.imagenUrl" alt="Avatar de Usuario" class="avatar cursor" (click)="abrirModal(usuario)">
+                                </td> -->
+
                                 <td>{{usuario.email}}</td>
                                 <td>{{usuario.nombre}}</td>
+                                <td>{{usuario.user}}</td>
                                 <td>
                                     <select class="form-control" [(ngModel)]="usuario.role" (change)="cambiarRole(usuario)">
-                                        <option value="ADMIN:ROLE">Admin</option>
+                                        <option value="ADMIN_ROLE">Admin</option>
                                         <option value="USER_ROLE">User</option>
                                     </select>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <span *ngIf="usuario.google" class="label label-danger">Google</span>
                                     <span *ngIf="!usuario.google" class="label label-info">Sistema</span>
-                                </td>
+                                </td> -->
                                 <td class="text-nowrap text-center">
 
 

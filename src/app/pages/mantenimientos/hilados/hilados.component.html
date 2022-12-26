@@ -1,0 +1,97 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input type="text" class="form-control" placeholder="Buscar Hilado ..." #txtTermino (keyup)="buscar(txtTermino.value)" />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Total de Hilados ({{totalHilados}})</h4>
+                        <h6 class="card-subtitle">Hilados registradas en mi aplicación</h6>
+                    </div>
+                    <div class="dt-buttons">
+                        <a class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#">
+                            <span>Copy</span></a>
+                        <a class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#">
+                            <span>CSV</span></a>
+                        <a class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#">
+                            <span>Excel</span></a>
+                        <a class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23" href="#">
+                            <span>PDF</span></a>
+                        <a class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#">
+                            <span>Print</span></a>
+                    </div>
+                    <div class="col">
+                        <div class="text-right">
+                            <a class="btn btn-primary" routerLink="/dashboard/hilado/nuevo">
+                                <i class="fa fa-hospital-o"></i> Crear Hilado
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table color-bordered-table info-bordered-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Familia</th>
+                                <th>Color</th>
+                                <th>Siglas</th>
+                                <th class="w100 text-nowrap">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hilado of hilados">
+                                <td>
+                                    {{hilado.nombre}}
+                                </td>
+                                <td>
+                                    {{hilado.familia.nombre}}
+                                </td>
+                                <td>
+                                    {{hilado.color.nombre}}
+                                </td>
+                                <td>
+                                    {{hilado.siglas}}
+                                </td>
+                                <td class="text-nowrap text-center">
+                                    <a [routerLink]="['/dashboard','hilados',hilado._id]" data-toggle="tooltip" data-original-title="Editar"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a class="cursor" (click)="borrarHilado(hilado)" data-toggle="tooltip" data-original-title="Borrar"> <i class="fa fa-close text-danger"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="txtTermino.value.length ===0 ">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary ">Anterioes</button> &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary ">Siguientes</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

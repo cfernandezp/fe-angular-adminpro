@@ -22,6 +22,10 @@
     height: 200px;
 }
 
+.w75 {
+    width: 75px;
+}
+
 .w100 {
     width: 100px;
 }
@@ -52,3 +56,5 @@
 .oculto {
     display: none
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

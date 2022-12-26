@@ -16,9 +16,12 @@ export class LoginComponent implements OnInit   {
 
   public formSubmitted = false;
   public auth2: any;
+  
 
   public loginForm = this.fb.group({    
-    email : [ localStorage.getItem('email') || '' ,[Validators.required,Validators.email  ]],
+    
+    //email : [ localStorage.getItem('email') || '' ,[Validators.required,Validators.email  ]],
+    user : [ localStorage.getItem('user') || '',[Validators.required ]],
     password : ['',[Validators.required ]],    
     recordar : [false]      
     });
@@ -35,13 +38,14 @@ export class LoginComponent implements OnInit   {
 
   login() {
     //console.log(this.loginForm.value);
+    console.log('Error');
     this.usuarioService.login(this.loginForm.value)
       .subscribe(resp=> {
         if ( this.loginForm.get('recordar').value  ){
-          localStorage.setItem('email',this.loginForm.get('email').value )
+          localStorage.setItem('user',this.loginForm.get('user').value )
         }
         else{
-          localStorage.removeItem('email')
+          localStorage.removeItem('user')
         }
 
       //Navegar al dashboard
@@ -69,7 +73,7 @@ export class LoginComponent implements OnInit   {
       'theme': 'dark',
     });
     
-    this.startApp();
+    //this.startApp();
 
 
 

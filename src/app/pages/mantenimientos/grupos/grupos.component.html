@@ -1,9 +1,10 @@
+<p>grupos works!</p>
 <div class="row animated fadeIn fast">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
 
-                <input type="text" class="form-control" placeholder="Buscar hospital ..." #txtTermino (keyup)="buscar(txtTermino.value)" />
+                <input type="text" class="form-control" placeholder="Buscar grupo ..." #txtTermino (keyup)="buscar(txtTermino.value)" />
 
             </div>
         </div>
@@ -28,8 +29,8 @@
 
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Hospitales ({{hospitales.length}})</h4>
-                        <h6 class="card-subtitle">Hospitales registrados en mi aplicación</h6>
+                        <h4 class="card-title">Total de grupos ({{ totalGrupos }})</h4>
+                        <h6 class="card-subtitle">Grupos registrados en mi aplicación</h6>
                     </div>
 
 
@@ -37,7 +38,7 @@
                         <div class="text-right">
                             <button class="btn btn-primary" (click)="abrirSweeAlert()">                    
                                 <i class="fa fa-hospital-o"></i>
-                                Crear Hospital
+                                Crear Grupo
                             </button>
                         </div>
                     </div>
@@ -47,35 +48,33 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="w100">Foto</th>
+                                <!-- <th class="w100">Foto</th> -->
                                 <th>Nombre</th>
                                 <th class="w100 text-nowrap">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let hospital of hospitales">
-                                <td class="text-center">
-                                    <img [src]="hospital.img | imagen : 'hospitales'" [alt]="hospital.nombre" class="w100 cursor" (click)="abrirModal(hospital)">
-                                </td>
+                            <tr *ngFor="let grupo of grupos">
+                                <!-- <td class="text-center">
+                                    <img [src]="marca.img | imagen : 'hospitales'" [alt]="marca.nombre" class="w100 cursor" (click)="abrirModal(marca)">
+                                </td> -->
                                 <td>
-                                    <input type="text" class="form-control" placeholder="Nombre del hospital" [(ngModel)]="hospital.nombre" />
+                                    <input type="text" class="form-control" placeholder="Nombre del grupo" [(ngModel)]="grupo.nombre" />
                                 </td>
-
-
                                 <td class="text-nowrap text-center">
-                                    <a (click)="guardarCambios(hospital)" data-toggle="tooltip" class="cursor" data-original-title="Guardar cambios">
+                                    <a (click)="guardarCambios(grupo)" data-toggle="tooltip" class="cursor" data-original-title="Guardar cambios">
                                         <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a (click)="eliminarHospital(hospital)" data-toggle="tooltip" class="cursor" data-original-title="Borrar"> <i class="fa fa-close text-danger"></i> </a>
+                                    <a (click)="eliminarGrupo(grupo)" data-toggle="tooltip" class="cursor" data-original-title="Borrar"> <i class="fa fa-close text-danger"></i> </a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <button class="btn btn-secondary ">Anterioes</button> &nbsp;
-                <button class="btn btn-secondary ">Siguientes</button>
-
-
+                <div *ngIf="txtTermino.value.length ===0 ">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary ">Anterioes</button> &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary ">Siguientes</button>
+                </div>
             </div>
         </div>
     </div>
